@@ -3,7 +3,7 @@ let scene, camera, renderer, cube;
 function init() {
     // Создание сцены
     scene = new THREE.Scene();
-    scene.background = new THREE.Color(0xdddddd);
+    scene.background = new THREE.Color(0xffffff);
 
     // Создание и настройка камеры
     camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
