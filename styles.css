@@ -2,4 +2,121 @@ body{
     background-color: white;
 }
 
+canvas{
+    position: fixed;
+    width: 100%;
+    z-index: 11;
+}
 
+h1{
+    font-family: "Golos Text", sans-serif;
+    color: black;
+}
+
+
+h2{
+    font-family: "Golos Text", sans-serif;
+    font-weight: 200;
+    color: black;
+}
+
+
+.black-bg{
+    background-color: black;
+    width: 100%;
+    height:100vh;
+    position: relative;
+}
+.white-bg{
+    background-color: white;
+    width: 100%;
+    height:100vh;
+    position: relative;
+}
+
+
+
+.target-div {
+    width: 100%;
+    height: 100vh;
+    font-size: 25px;
+    font-family:"Source Code Pro", monospace;    background-color: #000;
+    color: transparent;
+    transition: color .5s;
+    display: flex;
+    vertical-align: middle;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 20px; /* Отступ текста слева */
+}
+
+
+.company-name{
+    margin-left: 20px;
+    top:85%;
+    background-color: transparent;
+    position: fixed;
+    z-index: 12;
+}
+
+
+
+
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: Montserrat, sans-serif;
+	min-height: 100vh;
+	margin: 0;
+	padding: 0;
+	background-color: white;
+	color: #ffffff;
+}
+
+svg {
+	opacity: 0;
+	position: absolute;
+}
+
+.wrapper {
+	position: relative;
+    z-index: 10;
+}
+
+.hero {
+	min-height: 100vh;
+	
+	display: flex;
+	align-items: center;
+    z-index: 10;
+}
+
+.hero--secondary {
+	--mask: radial-gradient(circle at var(--x, 25%) var(--y, 25%), black 5%, transparent 20%);
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(45deg, #40e0d0, #9932cc, #ff1493, orange);
+	background:white;
+	color: black;
+	opacity:.2;
+	-webkit-mask-image: var(--mask);
+	mask-image: var(--mask);
+    z-index: 10;
+}
+
+.hero__heading {
+	font-family:"Source Code Pro", monospace;
+    font-optical-sizing: auto;
+	font-size: clamp(.5rem, 1vw, 3rem);
+    font-size: .8vw;
+	text-transform: lowercase;
+	margin: 0;
+    z-index: 10;
+    height:100%
+}
