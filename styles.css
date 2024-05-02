@@ -1,11 +1,49 @@
 body{
     background-color: white;
+    overflow-x: hidden;
 }
 
-canvas{
+canvas {
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
     position: fixed;
     width: 100%;
     z-index: 11;
+}
+
+.masked-text{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    color:white;
+    opacity:1;
+    
+}
+
+.generated-line{
+    display: flex;
+    position:absolute;
+    font-size: 1.2vw;
+    white-space: nowrap;
+    width: auto;
+    animation: slide-left 3s;
+}
+
+@keyframes slide-left{
+    0%{
+        opacity: 0;
+        transform: translateX(0);
+    }
+    50%{
+        opacity:0.3;
+        transform: translateX(-5vw);
+    }
+    100%{
+        opacity:0;
+        transform: translateX(-15vw);
+    }
 }
 
 h1{
@@ -95,7 +133,7 @@ svg {
 }
 
 .hero--secondary {
-	--mask: radial-gradient(circle at var(--x, 25%) var(--y, 25%), black 5%, transparent 20%);
+	--mask: radial-gradient(circle at var(--x, 25%) var(--y, 25%), black 5%, transparent 30%);
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -103,7 +141,7 @@ svg {
 	height: 100%;
 	background: linear-gradient(45deg, #40e0d0, #9932cc, #ff1493, orange);
 	background:white;
-	color: black;
+	color: green;
 	opacity:.2;
 	-webkit-mask-image: var(--mask);
 	mask-image: var(--mask);

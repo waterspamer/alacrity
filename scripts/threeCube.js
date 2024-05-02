@@ -1,4 +1,11 @@
-let scene, camera, renderer, cube, material;
+let scene, camera, renderer, cube, trueCube, material;
+
+
+const point1 = (0,0,0);
+
+const point2 = (1,0,0);
+
+
 
 function init() {
     // Создание сцены
@@ -6,8 +13,9 @@ function init() {
     //scene.background = new THREE.Color(0xffffff);
 
     // Создание и настройка камеры
-    camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.z = 5;
+    //camera = new THREE.PerspectiveCamera(15, window.innerWidth / window.innerHeight, 0.001, 10000);
+    camera = new THREE.PerspectiveCamera(35, 1, 0.001, 10000);
+    camera.position.z = 2;
 
 
     // Загрузка текстуры
@@ -66,25 +74,33 @@ const texture = textureLoader.load('sources/models/cubeTex.png');
 
     // Настройка рендерера
     renderer = new THREE.WebGLRenderer({antialias: true, alpha: true});
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    //renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setSize(512, 512);
     renderer.setClearColor(0x000000, 0);
     document.body.appendChild(renderer.domElement);
 
     // Создание геометрии куба
     const geometry = new THREE.BoxGeometry();
+    const trMat = new THREE.MeshNormalMaterial();
+    trMat.transparent = true;
+    trMat.opacity = 0;
     //const material = new THREE.MeshNormalMaterial();
-    cube = new THREE.Mesh(geometry, material);
+    cube = new THREE.Mesh(geometry, trMat);
     scene.add(cube);
-
+    material.side = THREE.DoubleSide;
 
     const loader = new THREE.FBXLoader();
-    loader.load('sources/models/LOGOCube.fbx', function(fbx) {
+    loader.load('sources/models/cube.fbx', function(fbx) {
         fbx.traverse(function(child) {
             if (child.isMesh) {
+                child.scale.set(.2,.2,.2);
+                console.log(child);
                 child.material = material; // Применяем шейдерный материал к каждому mesh в модели
             }
         });
-        cube.add(fbx);
+
+        trueCube = fbx;
+        cube.add(trueCube);
     }, undefined, function(error) {
         console.error(error);
     });
@@ -109,15 +125,21 @@ function animate() {
 }
 
 function onWindowResize() {
-    camera.aspect = window.innerWidth / window.innerHeight;
+    //camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    //renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
 function onMouseMove(event) {
     // Перевод координат мыши в нормализованные значения от -1 до 1
     const mouseX = (event.clientX / window.innerWidth) * 2 - 1;
     const mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+
+    trueCube.rotation.x = -mouseY * 0.2;
+    trueCube.rotation.y = mouseX * 0.2;
+
+    trueCube.position.x = -mouseX * 0.01;
+    trueCube.position.y = -mouseY * 0.01;
 
     //material.uniforms.uMouseX.value = event.clientX / window.innerWidth;
     // Перемещение куба в соответствии с координатами мыши
@@ -140,6 +162,13 @@ $(document).ready(function(){
             /* Проверяем, находится ли данный div в области видимости */
             var objectBottom = $(this).offset().top + $(this).outerHeight();
             
+
+            if (objectBottom < windowBottom + window.innerHeight/2 ){
+
+                renderer.domElement.style.transform = `translate(${-50-(objectBottom - windowBottom - window.innerHeight/2)/10}%, ${-50}%)`;
+                //cube.position.x = -(objectBottom - windowBottom - window.innerHeight/2) /200;
+                cube.rotation.y = (objectBottom - windowBottom - window.innerHeight/2) /1000;
+            }
             //cube.position.x =  ;
             
             
@@ -160,45 +189,6 @@ $(document).ready(function(){
                         ease: "linear"
                     });
 
-                    gsap.fromTo(cube.rotation, {
-                        y: 0 // конечное значение
-                    },
-                    {
-                        y:-windowBottom/objectBottom,
-                        duration: 0.5,
-                        ease: "linear"
-                    });
-
-                    gsap.fromTo(cube.position, {
-                        x: 0 // конечное значение
-                    },
-                    {
-                        x:windowBottom/objectBottom,
-                        duration: 0.5,
-                        ease: "linear"
-                    });
-
-
-
-                    /*
-                
-
-
-                
-
-
-                gsap.fromTo(cube.position, {
-                    x: 0 // конечное значение
-                },
-                {
-                    x:1,
-                    duration: 0.5,
-                    ease: "linear"
-                }); */
-
-
-
-
                 scrolled = true;
             }
                 //animateToWhite(1000);
@@ -214,49 +204,7 @@ $(document).ready(function(){
                         duration: 0.2,
                         ease: "linear"
                     });
-
-                    gsap.fromTo(cube.rotation, {
-                        y: -windowBottom/objectBottom // конечное значение
-                    },
-                    {
-                        y:0,
-                        duration: 0.5,
-                        ease: "linear"
-                    });
-
-                    gsap.fromTo(cube.position, {
-                        x: windowBottom/objectBottom // конечное значение
-                    },
-                    {
-                        x:0,
-                        duration: 0.5,
-                        ease: "linear"
-                    });
-
-
-                    /*
-                    
-
-
-                    gsap.fromTo(cube.rotation, {
-                        y: -1 // конечное значение
-                    },
-                    {
-                        y:0,
-                        duration: 0.5,
-                        ease: "linear"
-                    });
-
-                    gsap.fromTo(cube.position, {
-                        x: 1 // конечное значение
-                    },
-                    {
-                        x:0,
-                        duration: 0.5,
-                        ease: "linear"
-                    }); */
-
-
+                    renderer.domElement.style.transform = `translate(-50%, -50%)`;
                     scrolled = false;
                 }
                 
