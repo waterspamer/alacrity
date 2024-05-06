@@ -51,6 +51,7 @@ function getRandomInt(min, max) {
   }
 
 function updateElementWithCode() {
+	if (window.scroll.y < 100) return;
     const element = document.getElementsByClassName('masked-text')[0]; // Предполагается, что элемент с ID 'codeDisplay' уже существует в HTML.
 
     // Устанавливаем интервал генерации и размещения кода три раза в секунду.
@@ -59,16 +60,16 @@ function updateElementWithCode() {
         const codeElement = document.createElement('div'); // Создание нового элемента для текста.
 		codeElement.classList.add('generated-line');
 		var coords = getCenterCoordinates(document.getElementsByTagName('canvas')[0]);
-		codeElement.style.left = `${coords.x / window.innerWidth * 100}%`;
-		codeElement.style.top = `${coords.y  * 100 +getRandomInt(-25, 25)}%`;
-		codeElement.style.scale = `${Math.random()* (3 - 1.2) + 1.2}`;
+		codeElement.style.left = `${coords.x / window.innerWidth * 100 + 25} %`;
+		codeElement.style.top = `${coords.y  * 100 +getRandomInt(-55, 55)}%`;
+		codeElement.style.scale = `${Math.random()* (3 - 0.5) + 0.5}`;
         codeElement.innerHTML = randomCode; // Добавление текста в элемент.
         element.appendChild(codeElement); // Добавление элемента с текстом в целевой элемент.
 
         // Установка таймера для удаления созданного элемента через 300 мс.
         setTimeout(() => {
             codeElement.remove();
-        }, 3000);
+        }, 2900);
     }, 1000 / 10); // 1000 мс делённые на 3, чтобы функция выполнялась 3 раза в секунду.
 }
 
@@ -78,6 +79,7 @@ updateElementWithCode();
 
 
 function getCenterCoordinates(element) {
+	if (!element) return {x: 0, y: 10000};
 	const rect = element.getBoundingClientRect();
 	const centerX = rect.left + (rect.width / 2);
 	const centerY = rect.top  + (rect.height / 2);

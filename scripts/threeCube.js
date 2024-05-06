@@ -1,73 +1,49 @@
-let scene, camera, renderer, cube, trueCube, material;
+let scene, camera, renderer, cube, trueCube, material, clock, uniforms;
 
 
 const point1 = (0,0,0);
 
 const point2 = (1,0,0);
 
+async function loadShader(url) {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Ошибка при загрузке шейдера: ${url}`);
+    }
+    return await response.text();
+  }
 
 
-function init() {
+async function init() {
     // Создание сцены
     scene = new THREE.Scene();
     //scene.background = new THREE.Color(0xffffff);
-
+    clock = new THREE.Clock(true);
     // Создание и настройка камеры
     //camera = new THREE.PerspectiveCamera(15, window.innerWidth / window.innerHeight, 0.001, 10000);
     camera = new THREE.PerspectiveCamera(35, 1, 0.001, 10000);
     camera.position.z = 2;
+        // Загрузка текстуры
+    const textureLoader = new THREE.TextureLoader();
+    const texture = textureLoader.load('sources/models/cubeTex.png');
+    uniforms = {
+        uTime: {value: 0},
+        uTexture: { value: texture },
+        uMouseX: { value: 0 }, // Начальное положение курсора мыши (0.5 - центр)
+        viewDirection: {value : new THREE.Vector3(0,0,-1)},
+        fresnelBias: { value: 1.2 },
+        fresnelScale: { value: 3.2 },
+        fresnelPower: { value: 1.0 }
+    }
 
 
-    // Загрузка текстуры
-const textureLoader = new THREE.TextureLoader();
-const texture = textureLoader.load('sources/models/cubeTex.png');
 
 // Создание материала с шейдером
  material = new THREE.ShaderMaterial({
-    uniforms: {
-        uTexture: { value: texture },
-        uMouseX: { value: 0 } // Начальное положение курсора мыши (0.5 - центр)
-    },
-    vertexShader: `
-        varying vec2 vUv;
-        void main() {
-            vUv = uv;
-            gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-        }
-    `,
-    fragmentShader: `
-    uniform sampler2D uTexture;
-    uniform float uMouseX;
-    varying vec2 vUv;
-    
-    // Простая функция шума (можно заменить на более сложную реализацию)
-    float noise(vec2 p){
-        return fract(sin(dot(p.xy, vec2(12.9898,78.233))) * 43758.5453);
-    }
-    
-    void main() {
-        vec4 color = texture2D(uTexture, vUv);
-        float n = noise(vUv * 0.1); // Умножаем vUv, чтобы сделать шум мельче
-        float mixAmount = smoothstep(0.0, 1.0, uMouseX) * n;
-        color.rgb = mix(color.rgb, 1.0 - color.rgb, uMouseX);
-        gl_FragColor = color;
-    }
-    `
+    uniforms: uniforms,
+    vertexShader: await loadShader('sources/shaders/cubeVertex.glsl'),
+    fragmentShader: await loadShader('sources/shaders/cubeFragment.glsl')
 });
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
 
 
 
@@ -122,6 +98,7 @@ const texture = textureLoader.load('sources/models/cubeTex.png');
 function animate() {
     requestAnimationFrame(animate);
     renderer.render(scene, camera);
+    uniforms.uTime.value = clock.getElapsedTime();
 }
 
 function onWindowResize() {
