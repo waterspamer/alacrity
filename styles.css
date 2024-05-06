@@ -53,17 +53,39 @@ canvas {
 }
 
 h1{
-    font-family: "Golos Text", sans-serif;
+    font-family:"Source Code Pro", monospace;
     color: black;
 }
 
 
 h2{
-    font-family: "Golos Text", sans-serif;
-    font-weight: 200;
+    font-family:"Source Code Pro", monospace;
+    font-weight: 300;
     color: black;
 }
 
+.it-prod {
+    position: relative;
+    background-image: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+    background-repeat: no-repeat;
+    left: 13px;
+    background-size: 100% 2px;
+    background-position: 0 100%;
+    -webkit-background-clip: text;
+    /* color: transparent; */
+    /* -webkit-text-fill-color: black; */
+}
+
+.it-prod::before {
+    content: '';
+    position: absolute;
+    bottom: -1px; /* Высота подчеркивания от текста */
+    left: 0;
+    right: 0;
+    height: 2px; /* Толщина подчеркивания */
+    background-image: inherit;
+    pointer-events: none;
+  }
 
 .black-bg{
     background-color: black;

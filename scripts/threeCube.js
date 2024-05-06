@@ -53,6 +53,9 @@ async function init() {
     //renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setSize(512, 512);
     renderer.setClearColor(0x000000, 0);
+
+
+    
     document.body.appendChild(renderer.domElement);
 
     // Создание геометрии куба
@@ -90,7 +93,7 @@ async function init() {
 
     // Обновление позиции куба при движении мыши
     document.addEventListener('mousemove', onMouseMove, false);
-
+    renderer.domElement.addEventListener('click', animateCubeOnClick);
     // Запуск цикла рендеринга
     animate();
 }
@@ -125,6 +128,29 @@ function onMouseMove(event) {
 }
 
 
+
+function animateCubeOnClick(){
+
+    gsap.fromTo(trueCube.rotation, {
+        z: 0 // конечное значение
+    },
+    {
+        z:-.5,
+        duration: .2,
+        ease: "ease"
+    });
+    setTimeout(()=>{gsap.fromTo(trueCube.rotation, {
+        z: 0-.5// конечное значение
+    },
+    {
+        z:Math.PI * 2,
+        duration: .5,
+        ease: "ease"
+    })}, 200);
+    
+
+
+}
 
 
 
