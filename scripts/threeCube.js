@@ -143,11 +143,18 @@ function animateCubeOnClick(){
         z: 0-.5// конечное значение
     },
     {
-        z:Math.PI * 2,
+        z:Math.PI * 2 + .1,
         duration: .5,
         ease: "ease"
     })}, 200);
-    
+    setTimeout(()=>{gsap.fromTo(trueCube.rotation, {
+        z:Math.PI * 2 + .1// конечное значение
+    },
+    {
+        z:Math.PI * 2,
+        duration: .2,
+        ease: "ease"
+    })}, 700);
 
 
 }
