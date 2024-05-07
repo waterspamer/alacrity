@@ -122,6 +122,8 @@ function onMouseMove(event) {
     trueCube.position.x = -mouseX * 0.01;
     trueCube.position.y = -mouseY * 0.01;
 
+    //material.uniforms.viewDirection.value = new THREE.Vector3(1 - mouseX/window.innerWidth, 0, mouseX/window.innerWidth);
+
     //material.uniforms.uMouseX.value = event.clientX / window.innerWidth;
     // Перемещение куба в соответствии с координатами мыши
     //cube.position.x = mouseX * 5; // Умножаем, чтобы увеличить диапазон движения
@@ -132,6 +134,7 @@ function onMouseMove(event) {
 
 function animateCubeOnClick(){
 
+    setTimeout(()=>{
     gsap.fromTo(material.uniforms.normality, {
         value: 0.0
     },
@@ -139,6 +142,7 @@ function animateCubeOnClick(){
         value: 1.0,
         duration: .3
     });
+    }, 200);
 
     setTimeout(()=>{
         gsap.fromTo(material.uniforms.normality, {
