@@ -182,7 +182,8 @@ function animateCubeOnClick(){
 
 }
 
-
+let firstScrollEvent = false;
+let secondScrollEvent = true;
 
 
 let scrolled = false;
@@ -192,13 +193,16 @@ $(document).ready(function(){
     $(window).scroll(function() {
         var windowBottom = $(this).scrollTop() + $(this).innerHeight();
         $(".target-div").each(function() {
+
+
+            
             /* Проверяем, находится ли данный div в области видимости */
             var objectBottom = $(this).offset().top + $(this).outerHeight();
             
 
             /* Если пользователь доскроллил до div, постепенно меняем цвет текста на белый */
-            if (objectBottom < windowBottom + window.innerHeight/2) { // Если элемент полностью видим
-                renderer.domElement.style.transform = `translate(${-50-(objectBottom - windowBottom - window.innerHeight/2)/10}%, ${-50}%)`;
+            if (objectBottom < windowBottom + window.innerHeight/2 ) { // Если элемент полностью видим
+                renderer.domElement.style.transform = `translate(${-50-Math.sin(((objectBottom - windowBottom - window.innerHeight/2)/300))*45}%, ${-50}%)`;
                 //cube.position.x = -(objectBottom - windowBottom - window.innerHeight/2) /200;
                 cube.rotation.y = (objectBottom - windowBottom - window.innerHeight/2) /1000;
                 $(this).css('color', 'white');
@@ -215,8 +219,11 @@ $(document).ready(function(){
 
                 scrolled = true;
             }
+
                 //animateToWhite(1000);
-            } else { // Если элемент не полностью видим
+            }        
+            
+            else { // Если элемент не полностью видим
                 $(this).css('color', 'transparent');
                 
                 if (scrolled){ 
@@ -236,6 +243,19 @@ $(document).ready(function(){
         });
     }).scroll(); // Вызываем событие scroll при загрузке страницы
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

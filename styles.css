@@ -6,7 +6,7 @@ body{
 canvas {
     top: 50%;
     left: 50%;
-
+    cursor: pointer;
     transform: translate(-50%, -50%);
     position: fixed;
     width: 100%;
@@ -31,6 +31,7 @@ canvas {
 
 .generated-line{
     display: flex;
+    pointer-events: none;
     position:absolute;
     font-size: 1.2vw;
     white-space: nowrap;
@@ -100,13 +101,53 @@ h2{
     position: relative;
 }
 
+.top-menu{
+    perspective: 500px;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+    padding-left: 10%;
+    padding-right: 10%;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    z-index: 16;
+}
+.top-menu-el{
+    font-size: 3vw;
+    cursor: pointer;;
+    transition: all .1s;
+    scale:1;
+    height: auto;
+    text-align: center;
+    color: #000;
+    font-family:"Source Code Pro", monospace; 
+    width: 20%;
+    z-index: 15;
+}
 
+.top-menu-el:hover{
+    scale:2;
+}
 
 .target-div {
     width: 100%;
     height: 100vh;
     font-size: 25px;
     font-family:"Source Code Pro", monospace;    background-color: #000;
+    color: transparent;
+    transition: color .5s;
+    display: flex;
+    vertical-align: middle;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 20px; /* Отступ текста слева */
+}
+
+.target-div-2{
+    width: 100%;
+    height: 100vh;
+    font-size: 25px;
+    font-family:"Source Code Pro", monospace;   
     color: transparent;
     transition: color .5s;
     display: flex;
