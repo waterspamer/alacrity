@@ -6,6 +6,7 @@
     uniform float fresnelBias;
     uniform float fresnelScale;
     uniform float fresnelPower;
+    uniform float normality;
     varying vec2 vUv;
     varying vec3 vNormal;
     varying vec3 vPosition;
@@ -26,4 +27,5 @@
         float mixAmount = smoothstep(0.0, 1.0, uMouseX) * n;
         color.rgb = mix((color *  fresnel).rgb, 1.0 - (color *  fresnel).rgb, uMouseX);
         gl_FragColor = color;
+        gl_FragColor = mix(color, vec4(vNormal, 1.0), normality);
     }

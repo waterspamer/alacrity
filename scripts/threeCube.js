@@ -33,7 +33,8 @@ async function init() {
         viewDirection: {value : new THREE.Vector3(0,0,-1)},
         fresnelBias: { value: 1.2 },
         fresnelScale: { value: 3.2 },
-        fresnelPower: { value: 1.0 }
+        fresnelPower: { value: 1.0 },
+        normality: {value: 0.0}
     }
 
 
@@ -131,6 +132,24 @@ function onMouseMove(event) {
 
 function animateCubeOnClick(){
 
+    gsap.fromTo(material.uniforms.normality, {
+        value: 0.0
+    },
+    {
+        value: 1.0,
+        duration: .3
+    });
+
+    setTimeout(()=>{
+        gsap.fromTo(material.uniforms.normality, {
+            value: 1.0
+        },
+        {
+            value: 0.0,
+            duration: .3
+        });
+    }, 500);
+
     gsap.fromTo(trueCube.rotation, {
         z: 0 // конечное значение
     },
@@ -173,20 +192,11 @@ $(document).ready(function(){
             var objectBottom = $(this).offset().top + $(this).outerHeight();
             
 
-            if (objectBottom < windowBottom + window.innerHeight/2 ){
-
+            /* Если пользователь доскроллил до div, постепенно меняем цвет текста на белый */
+            if (objectBottom < windowBottom + window.innerHeight/2) { // Если элемент полностью видим
                 renderer.domElement.style.transform = `translate(${-50-(objectBottom - windowBottom - window.innerHeight/2)/10}%, ${-50}%)`;
                 //cube.position.x = -(objectBottom - windowBottom - window.innerHeight/2) /200;
                 cube.rotation.y = (objectBottom - windowBottom - window.innerHeight/2) /1000;
-            }
-            //cube.position.x =  ;
-            
-            
-            
-
-
-            /* Если пользователь доскроллил до div, постепенно меняем цвет текста на белый */
-            if (objectBottom < windowBottom + window.innerHeight/2) { // Если элемент полностью видим
                 $(this).css('color', 'white');
                 
                 if (!scrolled){
