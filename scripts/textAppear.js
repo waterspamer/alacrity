@@ -9,7 +9,7 @@ window.addEventListener('scroll', (e) => {
 
 	
 	var coords = getCenterCoordinates(document.getElementsByTagName('canvas')[0]);
-	document.getElementsByClassName('masked-text')[0].style.maskImage = `radial-gradient(circle 400px at ${coords.x / window.innerWidth * 100}% ${coords.y  * 100}%, white, transparent)`;
+	document.getElementsByClassName('masked-text')[0].style.maskImage = `radial-gradient(circle 250px at ${coords.x / window.innerWidth * 100}% ${coords.y  * 100}%, white, transparent)`;
 })
 
 
@@ -74,7 +74,7 @@ function updateElementWithCode() {
 }
 
 // Вызов функции для запуска процесса.
-updateElementWithCode();
+
 
 
 

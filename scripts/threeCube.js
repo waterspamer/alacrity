@@ -29,7 +29,7 @@ async function init() {
     uniforms = {
         uTime: {value: 0},
         uTexture: { value: texture },
-        uMouseX: { value: 0 }, // Начальное положение курсора мыши (0.5 - центр)
+        uMouseX: { value: 1 }, // Начальное положение курсора мыши (0.5 - центр)
         viewDirection: {value : new THREE.Vector3(0,0,-1)},
         fresnelBias: { value: 1.2 },
         fresnelScale: { value: 3.2 },
@@ -130,10 +130,13 @@ function onMouseMove(event) {
     //cube.position.y = mouseY * 5;
 }
 
-
+var canClickCube = true;
 
 function animateCubeOnClick(){
 
+    if (!canClickCube) return;
+    canClickCube = false;
+    setTimeout(()=>canClickCube = true, 800);
     setTimeout(()=>{
     gsap.fromTo(material.uniforms.normality, {
         value: 0.0
@@ -187,32 +190,57 @@ let secondScrollEvent = true;
 
 
 let scrolled = false;
-
+let codeAppeared = false;
 
 $(document).ready(function(){
     $(window).scroll(function() {
         var windowBottom = $(this).scrollTop() + $(this).innerHeight();
         $(".target-div").each(function() {
 
-
             
+            function clamp(num, min, max) {
+                return num <= min 
+                  ? min 
+                  : num >= max 
+                    ? max 
+                    : num
+              }
+
             /* Проверяем, находится ли данный div в области видимости */
             var objectBottom = $(this).offset().top + $(this).outerHeight();
-            
+            if (objectBottom < windowBottom + window.innerHeight/1.33){
+                $(".color-cont").each(function(){
+                    this.style.width ="10%";
+                    this.style.left = "90%";
+                    //this.style.height = `${clamp((this).scrollTop()* 1000, 10, 100)}%`;
+            });
+            }
+            else{
+                $(".color-cont").each(function(){
+                    this.style.width ="100%";
+                    this.style.left = "0%";
+                    this.style.height = "10%";
+                });
+            }
+
+            if (objectBottom < windowBottom + window.innerHeight/2 && !codeAppeared){
+                codeAppeared = true;
+                updateElementWithCode();
+            }
 
             /* Если пользователь доскроллил до div, постепенно меняем цвет текста на белый */
             if (objectBottom < windowBottom + window.innerHeight/2 ) { // Если элемент полностью видим
                 renderer.domElement.style.transform = `translate(${-50-Math.sin(((objectBottom - windowBottom - window.innerHeight/2)/300))*45}%, ${-50}%)`;
                 //cube.position.x = -(objectBottom - windowBottom - window.innerHeight/2) /200;
                 cube.rotation.y = (objectBottom - windowBottom - window.innerHeight/2) /1000;
-                $(this).css('color', 'white');
+                $(this).css('color', 'black');
                 
                 if (!scrolled){
                     gsap.fromTo(material.uniforms.uMouseX, {
-                        value: 0 // конечное значение
+                        value: 1 // конечное значение
                     },
                     {
-                        value:1,
+                        value:0,
                         duration: 0.2,
                         ease: "linear"
                     });
@@ -228,10 +256,10 @@ $(document).ready(function(){
                 
                 if (scrolled){ 
                     gsap.fromTo(material.uniforms.uMouseX, {
-                        value: 1 // конечное значение
+                        value: 0 // конечное значение
                     },
                     {
-                        value:0,
+                        value:1,
                         duration: 0.2,
                         ease: "linear"
                     });
