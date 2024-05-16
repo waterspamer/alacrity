@@ -236,6 +236,7 @@ $(document).ready(function(){
                 $(this).css('color', 'black');
                 
                 if (!scrolled){
+                    animateCubeOnClick();
                     gsap.fromTo(material.uniforms.uMouseX, {
                         value: 1 // конечное значение
                     },
