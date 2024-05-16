@@ -232,7 +232,11 @@ $(document).ready(function(){
             if (objectBottom < windowBottom + window.innerHeight/2 ) { // Если элемент полностью видим
                 renderer.domElement.style.transform = `translate(${-50-Math.sin(((objectBottom - windowBottom - window.innerHeight/2)/300))*45}%, ${-50}%)`;
                 //cube.position.x = -(objectBottom - windowBottom - window.innerHeight/2) /200;
-                cube.rotation.y = (objectBottom - windowBottom - window.innerHeight/2) /1000;
+                //cube.rotation.y = (objectBottom - windowBottom - window.innerHeight/2) /1000;
+                cube.rotation.y = Math.sin(((objectBottom - windowBottom - window.innerHeight/2)/300));
+                //cube.scale.set(Math.abs(Math.sin(((objectBottom - windowBottom - window.innerHeight/2)/300)))+ .5,
+                //Math.abs(Math.sin(((objectBottom - windowBottom - window.innerHeight/2)/300)))+ .5,
+                //Math.abs(Math.sin(((objectBottom - windowBottom - window.innerHeight/2)/300)))+ .5)
                 $(this).css('color', 'black');
                 
                 if (!scrolled){
@@ -264,6 +268,7 @@ $(document).ready(function(){
                         duration: 0.2,
                         ease: "linear"
                     });
+                    cube.rotation.y = 0;
                     renderer.domElement.style.transform = `translate(-50%, -50%)`;
                     scrolled = false;
                 }
