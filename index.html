@@ -46,8 +46,10 @@
 
     <script src="https://cdn.jsdelivr.net/npm/three@0.150.0/build/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r147/examples/js/loaders/FBXLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/RGBELoader.js"></script>
     <script src="scripts/textAppear.js"></script>
     <script src="scripts/threeCube.js"></script>
+    
 
   
     <div class="company-name">
@@ -71,6 +73,7 @@
     <div class="white-bg">
         <div class ="port-cont">
             <div class="port">
+                <canvas id="canvas1"></canvas>
                 <div class ="port-rainbow">
                     <div class ="port-r-el-1" ></div>
                     <div class ="port-r-el-2" ></div>
@@ -80,20 +83,23 @@
                  
                 <div class ="port-header">приложения</div>
                 <div class="port-text-line">
-                    <div class ="port-text">[для iOS]</div> <div class ="port-text">[для Android]</div>
+                    <div class ="port-text">[игры] [VR/AR]</div>
+                    
+                </div>
+                <div class="port-text-line">
+                    <div class ="port-text">[лендинги]</div>
+                    
                 </div>
                 <div class="port-text-line">
                     <div class ="port-text">[интернет-магазины]</div>
                 </div>
                 <div class="port-text-line">
-                    <div class ="port-text">[лендинги]</div>
-                </div>
-                <div class="port-text-line">
-                    <div class ="port-text">[игры] [VR/AR]</div>
+                    <div class ="port-text">[для iOS]</div> <div class ="port-text">[для Android]</div>
                 </div>
                 <div class="port-button">наши работы и кейсы</div>
             </div>
             <div class="port">
+                <canvas id="canvas2"></canvas>
                 <div class ="port-rainbow">
                     <div class ="port-r-el-1" ></div>
                     <div class ="port-r-el-2" ></div>
@@ -117,6 +123,7 @@
                 <div class="port-button">увидеть и удивиться</div>
             </div>
             <div class="port">
+                <canvas id="canvas3"></canvas>
                 <div class ="port-rainbow">
                     <div class ="port-r-el-1" ></div>
                     <div class ="port-r-el-2" ></div>
@@ -144,7 +151,7 @@
     </div>
     <div class ="black-bg"><div class="write-btn">Написать нам</div></div>
 
-
+    <script src="scripts/interactiveModels.js"></script>
     
 
 </body>

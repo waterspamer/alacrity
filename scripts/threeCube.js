@@ -55,7 +55,7 @@ async function init() {
     renderer.setSize(512, 512);
     renderer.setClearColor(0x000000, 0);
 
-
+    renderer.domElement.id = 'canvasMain';
     
     document.body.appendChild(renderer.domElement);
 
@@ -230,7 +230,7 @@ $(document).ready(function(){
 
             /* Если пользователь доскроллил до div, постепенно меняем цвет текста на белый */
             if (objectBottom < windowBottom + window.innerHeight/2 ) { // Если элемент полностью видим
-                renderer.domElement.style.transform = `translate(${-50-Math.sin(((objectBottom - windowBottom - window.innerHeight/2)/300))*45}%, ${-50}%)`;
+                document.getElementById('canvasMain').style.transform = `translate(${-50-Math.sin(((objectBottom - windowBottom - window.innerHeight/2)/300))*45}%, ${-50}%)`;
                 //cube.position.x = -(objectBottom - windowBottom - window.innerHeight/2) /200;
                 //cube.rotation.y = (objectBottom - windowBottom - window.innerHeight/2) /1000;
                 cube.rotation.y = Math.sin(((objectBottom - windowBottom - window.innerHeight/2)/300));
@@ -269,7 +269,7 @@ $(document).ready(function(){
                         ease: "linear"
                     });
                     cube.rotation.y = 0;
-                    renderer.domElement.style.transform = `translate(-50%, -50%)`;
+                    document.getElementById('canvasMain').style.transform = `translate(-50%, -50%)`;
                     scrolled = false;
                 }
                 

@@ -3,7 +3,7 @@ body{
     overflow-x: hidden;
 }
 
-canvas {
+#canvasMain {
     top: 50%;
     left: 50%;
     cursor: pointer;
@@ -11,6 +11,33 @@ canvas {
     position: fixed;
     width: 100%;
     z-index: 11;
+}
+
+#canvas1{
+    position: absolute;
+    left:30%;
+    top:-25%;
+    z-index: 9;
+    height: 300px;
+    width: 300px;
+}
+
+#canvas2{
+    position: absolute;
+    left:30%;
+    top:-25%;
+    z-index: 9;
+    height: 300px;
+    width: 300px;
+}
+
+#canvas3{
+    position: absolute;
+    left:30%;
+    top:-25%;
+    z-index: 9;
+    height: 300px;
+    width: 300px;
 }
 
 .copyright{
@@ -240,8 +267,8 @@ svg {
 
 
 .port-cont{
-
-    z-index: 20;
+    position: relative;
+    z-index: 10;
     width: 100%;
     height: 30vh;
     padding-left: 10%;
@@ -251,13 +278,14 @@ svg {
 }
 
 .port{
-
+    position: relative;
     height: 100%;
     width:25%;
-    z-index: 30;
+    z-index: 10;
 }
 
 .port-header{
+    position: relative;
     font-family:"Source Code Pro", monospace;
     margin-bottom: 20px;
     font-size: 25px;
@@ -271,31 +299,31 @@ svg {
     top: 24px;
     left:-44px;
     width: 40px;
-    z-index: 30;
+    z-index: 10;
 }
 .port-r-el-1{
     background: linear-gradient(45deg, transparent, #C5573B);
     position: relative;
     height:25%;
-    z-index: 30;
+    z-index: 10;
 }
 .port-r-el-2{
     background: linear-gradient(45deg,transparent, #D08339);
     position: relative;
     height:25%;
-    z-index: 30;
+    z-index: 10;
 }
 .port-r-el-3{
     background: linear-gradient(45deg,transparent, #E4AE44);
     position: relative;
     height:25%;
-    z-index: 30;
+    z-index: 10;
 }
 .port-r-el-4{
     background: linear-gradient(45deg,transparent, #827C46);
     position: relative;
     height:25%;
-    z-index: 30;
+    z-index: 10;
 }
 
 .port-text-line{
@@ -306,6 +334,8 @@ svg {
 }
 
 .port-text{
+    position: relative;
+    z-index: 11;
     -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */
   user-select: none; /* Standard syntax */
@@ -314,7 +344,7 @@ svg {
     white-space: nowrap;
 }
 .port-text-line:hover{
-    scale:1.1;
+    color:blueviolet;
 }
 
 
@@ -322,6 +352,8 @@ svg {
     cursor: pointer;
     transition: all .2s;
     position: relative;
+    max-width: 300px;;
+    z-index: 11;
     font-family:"Source Code Pro", monospace;
     color: dimgrey;
     background-color: #EDE8E2;
