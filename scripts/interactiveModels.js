@@ -11,13 +11,13 @@ let texture;
 
 
 function initModels(){
-    init('canvas1', 'sources/models/web.fbx', new THREE.MeshPhongMaterial({ color: 0x999698, shininess: 100, side: THREE.DoubleSide }));
-    init('canvas2', 'sources/models/stand.fbx',new THREE.MeshPhongMaterial({ color: 0x999698, shininess: 100, side: THREE.DoubleSide }));
-    init('canvas3', 'sources/models/camera.fbx', new THREE.MeshPhongMaterial({ color: 0x999698, shininess: 100, side: THREE.DoubleSide }));
+    init('canvas1', 'sources/models/web.fbx', new THREE.MeshPhongMaterial({ color: 0x999698, shininess: 100, side: THREE.DoubleSide }), 1);
+    init('canvas2', 'sources/models/stand.fbx',new THREE.MeshPhongMaterial({ color: 0x999698, shininess: 100, side: THREE.DoubleSide }), 1);
+    init('canvas3', 'sources/models/camera.fbx', new THREE.MeshPhongMaterial({ color: 0x999698, shininess: 100, side: THREE.DoubleSide }), 8/9);
 }
 
 
-function init(canvasId, modelPath, material) {
+function init(canvasId, modelPath, material, rotation) {
     const canvas = document.getElementById(canvasId);
     const renderer = new THREE.WebGLRenderer({ canvas, antialias: true , alpha: true});
     renderer.setSize(300, 300);
@@ -40,6 +40,7 @@ function init(canvasId, modelPath, material) {
                 //child.position.set(new THREE.Vector3(0,0,0));
                 console.log(child.position);
                 child.scale.set(.1, .1, .1);
+                child.rotation.set(3.14/2, 3.1415, rotation * 3.14);
                 child.material = material; // Применяем материал к каждому mesh в модели
             }
         });

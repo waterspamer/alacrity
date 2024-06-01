@@ -209,14 +209,14 @@ $(document).ready(function(){
             /* Проверяем, находится ли данный div в области видимости */
             var objectBottom = $(this).offset().top + $(this).outerHeight();
             if (objectBottom < windowBottom + window.innerHeight/1.33){
-                $(".color-cont").each(function(){
+                $(".color-cont").first(function(){
                     this.style.width ="10%";
                     this.style.left = "90%";
                     //this.style.height = `${clamp((this).scrollTop()* 1000, 10, 100)}%`;
             });
             }
             else{
-                $(".color-cont").each(function(){
+                $(".color-cont").first(function(){
                     this.style.width ="100%";
                     this.style.left = "0%";
                     this.style.height = "10%";

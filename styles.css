@@ -371,5 +371,42 @@ svg {
 }
 
 .port-button:hover{
+    background-color: black;
+    color: white;
     scale: 1.1;
+}
+
+
+
+.last-sec{
+    padding-top: 10%;
+    display: flex;
+}
+
+.mail{
+    width:50%;
+}
+
+.info-sec{
+    width:50%;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap:10vh;
+}
+
+.info-cont{
+    width:100%;
+    height:25vh;
+}
+
+.info-header{
+    font-family:"Source Code Pro", monospace;
+    font-size: 5vh;
+    align-self: flex-start;
+}
+
+.info-add{
+    align-self: flex-end;
+    align-content: end;
 }
