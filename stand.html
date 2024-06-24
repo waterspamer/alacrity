@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MagicBox</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #EDE8E2;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            padding: 50px 0;
+        }
+        .title {
+            font-size: 5em;
+            margin: 0;
+            position: relative;
+        }
+        .subtitle {
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+        .new {
+    color: red;
+    font-size: .4em;
+    position: absolute;
+    top: 0px;
+    /* right: -50px; */
+}
+        .menu {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+            gap:30px;
+        }
+        .menu-item {
+            cursor: pointer;
+            transition: all .2s;
+            position: relative;
+            z-index: 11;
+            font-family:"Source Code Pro", monospace;
+            color: dimgrey;
+            background-color: #EDE8E2;
+            height: 40px;
+            white-space: nowrap;
+            text-align: center;
+            align-items: center;
+            vertical-align: middle;
+            display: inline-flex;
+            justify-content: space-around;
+        }
+        .menu-item:hover{
+            color:white;
+            background-color: black;
+            border-radius: 30px;
+            outline: 3px solid black;
+            box-shadow: 0 3px 0px 3px rgba(0,0,0,1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">
+            MagicBox<span class="new">new</span>
+        </div>
+        <div class="subtitle">
+            интерактивный стенд, с управлением жестами без касаний
+        </div>
+        <div class="menu">
+            <div class="menu-item" onclick="location.href='#'">производительность</div>
+            <div class="menu-item" onclick="location.href='#'">интерактив</div>
+            <div class="menu-item" onclick="location.href='#'">управление</div>
+            <div class="menu-item" onclick="location.href='#'">софт</div>
+            <div class="menu-item" onclick="location.href='#'">вариативность</div>
+        </div>
+    </div>
+</body>
+</html>

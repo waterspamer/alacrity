@@ -10,7 +10,7 @@ body{
     transform: translate(-50%, -50%);
     position: fixed;
     width: 100%;
-    z-index: 11;
+    z-index: 9;
 }
 
 #canvas1{
@@ -275,6 +275,22 @@ svg {
     padding-right: 10%;
     justify-content: space-between;
     display: flex;
+    flex-direction: row;
+}
+
+@media screen and (max-width: 600px) {
+    .port-cont{
+        flex-direction: column;
+        gap:50px;
+        left:-10vh;
+        align-items: center;
+    }
+    .port-button{
+        display: inline-block;
+    }
+    .port-header{
+        font-size: 4vh;
+    }
 }
 
 .port{
@@ -288,8 +304,8 @@ svg {
     position: relative;
     font-family:"Source Code Pro", monospace;
     margin-bottom: 20px;
-    font-size: 25px;
-    font-weight: 600;
+    font-size: 35px;
+    font-weight: 700;
     color: #131313;
 }
 
@@ -352,17 +368,16 @@ svg {
     cursor: pointer;
     transition: all .2s;
     position: relative;
-    max-width: 300px;;
     z-index: 11;
     font-family:"Source Code Pro", monospace;
     color: dimgrey;
     background-color: #EDE8E2;
     height: 40px;
-    width: auto;
+    white-space: nowrap;
     text-align: center;
     align-items: center;
     vertical-align: middle;
-    display: flex;
+    display: inline-flex;
     justify-content: space-around;
     border-radius: 30px;
   outline: 3px solid black;
@@ -396,17 +411,28 @@ svg {
 }
 
 .info-cont{
+    display: flex;
+    flex-direction: column;
     width:100%;
+    padding-right: 20px;
     height:25vh;
 }
 
 .info-header{
     font-family:"Source Code Pro", monospace;
-    font-size: 5vh;
+    font-size: 4vh;
     align-self: flex-start;
 }
 
 .info-add{
+    display: flex;
+    position: relative;
+    color:grey;
+    font-size:4dvb;
     align-self: flex-end;
     align-content: end;
+}
+
+.rainbow-offset{
+    left:0%;
 }
